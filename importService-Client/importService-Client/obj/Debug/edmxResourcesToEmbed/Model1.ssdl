@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Patronimyc" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="IGender" Type="int" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Mail" Type="varchar" MaxLength="30" />
+    <Property Name="DateOfRegistation" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Client_Service">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IService" Type="int" />
+    <Property Name="IClient" Type="int" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="35" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="MainImagePath" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="Cost" Type="float" Nullable="false" />
+    <Property Name="Discount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="service_client$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Услуга" Type="nvarchar" MaxLength="255" />
+    <Property Name="Начало оказания услуги" Type="datetime" />
+    <Property Name="Клиент" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__Client__IGender__29572725">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="IGender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client_Se__IClie__34C8D9D1">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Client_Service" Type="Self.Client_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Client_Service">
+        <PropertyRef Name="IClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client_Se__IServ__33D4B598">
+    <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+    <End Role="Client_Service" Type="Self.Client_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Client_Service">
+        <PropertyRef Name="IService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище ModelContainer">
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client_Service" EntityType="Self.Client_Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="service_client$" EntityType="Self.service_client$" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Client__IGender__29572725" Association="Self.FK__Client__IGender__29572725">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client_Se__IClie__34C8D9D1" Association="Self.FK__Client_Se__IClie__34C8D9D1">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Client_Service" EntitySet="Client_Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client_Se__IServ__33D4B598" Association="Self.FK__Client_Se__IServ__33D4B598">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="Client_Service" EntitySet="Client_Service" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

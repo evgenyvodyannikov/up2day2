@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e3e01aa97d8d4329bd5e62dd28c695b9" Name="Diagram1">
+        <EntityTypeShape EntityType="Model1.Country" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Model1.Insurance" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="Model1.Login_History" Width="1.5" PointX="7.5" PointY="4.75" />
+        <EntityTypeShape EntityType="Model1.Patient" Width="1.5" PointX="5.25" PointY="2.375" />
+        <EntityTypeShape EntityType="Model1.Social_License" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="Model1.sysdiagram" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="7.5" PointY="2" />
+        <AssociationConnector Association="Model1.FK__Insurance__Count__403A8C7D" />
+        <AssociationConnector Association="Model1.FK__Patient__IInsura__45F365D3" />
+        <AssociationConnector Association="Model1.FK__Login_His__IPati__48CFD27E" />
+        <AssociationConnector Association="Model1.FK__Patient__Social___44FF419A" />
+        <AssociationConnector Association="Model1.FK__User__IPatient__4BAC3F29" />
+        <EntityTypeShape EntityType="Model1.patients_" Width="1.5" PointX="3.375" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

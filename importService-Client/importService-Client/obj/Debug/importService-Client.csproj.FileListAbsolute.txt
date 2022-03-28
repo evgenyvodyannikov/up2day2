@@ -1,0 +1,13 @@
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\bin\Debug\importService-Client.exe.config
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\bin\Debug\importService-Client.exe
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\bin\Debug\importService-Client.pdb
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\bin\Debug\EntityFramework.dll
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\bin\Debug\EntityFramework.xml
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\obj\Debug\importService-Client.csproj.AssemblyReference.cache
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\obj\Debug\importService-Client.csproj.CoreCompileInputs.cache
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\obj\Debug\importService-Client.csproj.CopyComplete
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\obj\Debug\importService-Client.exe
+C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\obj\Debug\importService-Client.pdb

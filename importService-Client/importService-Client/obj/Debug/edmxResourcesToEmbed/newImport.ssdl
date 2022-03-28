@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Model1" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Insurance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Country" Type="int" />
+    <Property Name="Address" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="INN" Type="int" Nullable="false" />
+    <Property Name="PP" Type="int" Nullable="false" />
+    <Property Name="BIK" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Login_History">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IPatient" Type="int" />
+    <Property Name="IPaddress" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Browser" Type="varchar(max)" Nullable="false" />
+    <Property Name="UA" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="GuID" Type="varchar(max)" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="SocialSecNumber" Type="int" Nullable="false" />
+    <Property Name="EIN" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Social_Type" Type="int" />
+    <Property Name="Passport_Serial" Type="int" Nullable="false" />
+    <Property Name="Passport_Number" Type="int" Nullable="false" />
+    <Property Name="BirthDate" Type="date" Nullable="false" />
+    <Property Name="IInsurance" Type="int" />
+  </EntityType>
+  <EntityType Name="patients$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fullname" Type="nvarchar" MaxLength="255" />
+    <Property Name="login" Type="nvarchar" MaxLength="255" />
+    <Property Name="pwd" Type="nvarchar" MaxLength="255" />
+    <Property Name="guid" Type="nvarchar" MaxLength="255" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" />
+    <Property Name="social_sec_number" Type="float" />
+    <Property Name="ein" Type="nvarchar" MaxLength="255" />
+    <Property Name="social_type" Type="nvarchar" MaxLength="255" />
+    <Property Name="phone" Type="nvarchar" MaxLength="255" />
+    <Property Name="passport_s" Type="float" />
+    <Property Name="passport_n" Type="float" />
+    <Property Name="birthdate_timestamp" Type="float" />
+    <Property Name="country" Type="nvarchar" MaxLength="255" />
+    <Property Name="insurance_name" Type="nvarchar" MaxLength="255" />
+    <Property Name="insurance_address" Type="nvarchar" MaxLength="255" />
+    <Property Name="insurance_inn" Type="float" />
+    <Property Name="insurance_p" Type="float" />
+    <Property Name="insurance_bik" Type="float" />
+    <Property Name="ipadress2" Type="nvarchar" MaxLength="255" />
+    <Property Name="ua" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Social_License">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IPatient" Type="int" />
+    <Property Name="Login" Type="varchar(max)" Nullable="false" />
+    <Property Name="Password" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Insurance__Count__403A8C7D">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Insurance" Type="Self.Insurance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Insurance">
+        <PropertyRef Name="Country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Login_His__IPati__48CFD27E">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+    <End Role="Login_History" Type="Self.Login_History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Login_History">
+        <PropertyRef Name="IPatient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Patient__IInsura__45F365D3">
+    <End Role="Insurance" Type="Self.Insurance" Multiplicity="0..1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Insurance">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="IInsurance" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Patient__Social___44FF419A">
+    <End Role="Social_License" Type="Self.Social_License" Multiplicity="0..1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Social_License">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="Social_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__IPatient__4BAC3F29">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="IPatient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище Model1Container">
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Insurance" EntityType="Self.Insurance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Login_History" EntityType="Self.Login_History" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="patients$" EntityType="Self.patients$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Social_License" EntityType="Self.Social_License" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Insurance__Count__403A8C7D" Association="Self.FK__Insurance__Count__403A8C7D">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Insurance" EntitySet="Insurance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Login_His__IPati__48CFD27E" Association="Self.FK__Login_His__IPati__48CFD27E">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="Login_History" EntitySet="Login_History" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Patient__IInsura__45F365D3" Association="Self.FK__Patient__IInsura__45F365D3">
+      <End Role="Insurance" EntitySet="Insurance" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Patient__Social___44FF419A" Association="Self.FK__Patient__Social___44FF419A">
+      <End Role="Social_License" EntitySet="Social_License" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__IPatient__4BAC3F29" Association="Self.FK__User__IPatient__4BAC3F29">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
