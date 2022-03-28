@@ -84,10 +84,6 @@ namespace importService_Client
                 }
             }
 
-
-
-
-
             void AddPatients()
             {
                 foreach (patients_ patient in patients)
@@ -183,27 +179,6 @@ namespace importService_Client
                     context.User_Patient.Add(newUserPatient);
                     context.SaveChanges();
 
-                    //string[] meta = patient.ua.Split(' ');
-                    //string[] os = meta[1].StartsWith("(") ? meta[1].Substring(1, meta[1].Length - 1).Split(';') : meta[1].Split(' ');
-                    //string oss = "";
-                    //string ossVersion = "";
-                    //string language = "";
-                    //string rev = "";
-                    //string browser = "";
-
-                    //try
-                    //{
-                    //    oss = os[0];
-                    //    ossVersion = os[1];
-                    //    language = os.Where(x => x.Contains("-")).FirstOrDefault();
-                    //    rev = os.Where(o => o.StartsWith("rv")).FirstOrDefault();
-                    //    browser = os.Where(x => x.StartsWith("Safari")).FirstOrDefault();
-                    //}
-                    //catch
-                    //{
-
-                    //}
-
                     Login_History login_History = new Login_History
                     {
                         User = newUser,
@@ -226,26 +201,9 @@ namespace importService_Client
                           "\nСервисов: " + Services +
                           "\nПользователей: " + UUsers);
                 Console.ReadKey();
-
-
-
-
-                //Context context = new Context();
-                //foreach (service_client_ scl in context.service_client_)
-                //{
-                //    Client client = context.Clients.Where(x => x.LastName == scl.Клиент.Trim()).FirstOrDefault();
-                //    Service service = context.Services.Where(x => x.Title == scl.Услуга.Trim()).FirstOrDefault();
-
-
-                //    Client_Service newScl = new Client_Service { Client = client, Service = service, StartDate = (DateTime)scl.Начало_оказания_услуги };
-
-                //    context.Client_Service.Add(newScl);
-                //}
-                //context.SaveChanges();
             }
         }
           
-
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
             // Unix timestamp is seconds past epoch
