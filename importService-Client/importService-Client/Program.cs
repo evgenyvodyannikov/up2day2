@@ -12,8 +12,8 @@ namespace importService_Client
         {
 
             Docstation context = new Docstation();
-
-          foreach(patients_ patient in context.patients_)
+            int count = 0;
+          foreach (patients_ patient in context.patients_)
             {
                 
                 string[] Fullname = patient.fullname.Split(' ');
@@ -31,7 +31,8 @@ namespace importService_Client
                 {
                     country = new Country { Title = patient.country };
                     context.Countries.Add(country);
-                    context.SaveChanges();
+                    context.SaveChangesAsync();
+                    //context.SaveChanges();
                 }
                 
 
@@ -54,8 +55,8 @@ namespace importService_Client
                         Country1 = country,
                         PP = (int)patient.insurance_p
                     };
-                    context.Insurances.Add(insurance); 
-                    context.SaveChanges();
+                    context.Insurances.Add(insurance);
+                    context.SaveChangesAsync();
                 }
 
                 Social_License social_License;
@@ -68,7 +69,7 @@ namespace importService_Client
                 {
                     social_License = new Social_License { Title = patient.social_type.Trim() };
                     context.Social_License.Add(social_License);
-                    context.SaveChanges();
+                    context.SaveChangesAsync();
                 }
 
                 Patient newPatient = new Patient
@@ -87,11 +88,11 @@ namespace importService_Client
                     Social_License = social_License
                 };
                 context.Patients.Add(newPatient);
-                context.SaveChanges();
+                context.SaveChangesAsync();
+                count++;
+                Console.WriteLine(count);
 
-
-
-              //  Login_History login_History = new Login_History { IPaddress = patient.ipadress2, Patient = newPatient, Title = "LastLogin", //Browser = patient.uc  }
+                //  Login_History login_History = new Login_History { IPaddress = patient.ipadress2, Patient = newPatient, Title = "LastLogin", //Browser = patient.uc  }
 
 
             }
@@ -116,8 +117,12 @@ namespace importService_Client
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
             // Unix timestamp is seconds past epoch
+            if(unixTimeStamp < 0)
+            {
+                unixTimeStamp *= -1;
+            }
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+          //    dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dateTime;
         }
     }
