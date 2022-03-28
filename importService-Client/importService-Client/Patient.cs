@@ -17,8 +17,7 @@ namespace importService_Client
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
         {
-            this.Login_History = new HashSet<Login_History>();
-            this.Users = new HashSet<User>();
+            this.User_Patient = new HashSet<User_Patient>();
         }
     
         public int ID { get; set; }
@@ -36,10 +35,8 @@ namespace importService_Client
         public Nullable<int> IInsurance { get; set; }
     
         public virtual Insurance Insurance { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Login_History> Login_History { get; set; }
         public virtual Social_License Social_License { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User_Patient> User_Patient { get; set; }
     }
 }

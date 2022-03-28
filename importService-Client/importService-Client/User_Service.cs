@@ -12,14 +12,13 @@ namespace importService_Client
     using System;
     using System.Collections.Generic;
     
-    public partial class Login_History
+    public partial class User_Service
     {
         public int ID { get; set; }
         public Nullable<int> IUser { get; set; }
-        public string IPaddress { get; set; }
-        public Nullable<System.DateTime> LastEnter { get; set; }
-        public string MetaData { get; set; }
+        public Nullable<int> IService { get; set; }
     
+        public virtual Service Service { get; set; }
         public virtual User User { get; set; }
     }
 }

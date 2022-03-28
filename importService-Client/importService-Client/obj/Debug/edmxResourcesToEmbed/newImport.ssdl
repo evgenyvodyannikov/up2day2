@@ -24,11 +24,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="IPatient" Type="int" />
+    <Property Name="IUser" Type="int" />
     <Property Name="IPaddress" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="Browser" Type="varchar(max)" Nullable="false" />
-    <Property Name="UA" Type="varchar(max)" Nullable="false" />
+    <Property Name="LastEnter" Type="date" />
+    <Property Name="MetaData" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Patient">
     <Key>
@@ -74,6 +73,24 @@
     <Property Name="ipadress2" Type="nvarchar" MaxLength="255" />
     <Property Name="ua" Type="nvarchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="Tittle" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="services$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="float" />
+    <Property Name="Service" Type="nvarchar" MaxLength="255" />
+    <Property Name="Price" Type="nvarchar" MaxLength="255" />
+  </EntityType>
   <EntityType Name="Social_License">
     <Key>
       <PropertyRef Name="ID" />
@@ -81,26 +98,52 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IPatient" Type="int" />
     <Property Name="Login" Type="varchar(max)" Nullable="false" />
     <Property Name="Password" Type="varchar(max)" Nullable="false" />
+    <Property Name="Type" Type="int" />
   </EntityType>
-  <Association Name="FK__Insurance__Count__403A8C7D">
+  <EntityType Name="User_Patient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IUser" Type="int" />
+    <Property Name="IPatient" Type="int" />
+  </EntityType>
+  <EntityType Name="User_Service">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IUser" Type="int" />
+    <Property Name="IService" Type="int" />
+  </EntityType>
+  <EntityType Name="User_Type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tittle" Type="varchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="login" Type="nvarchar" MaxLength="255" />
+    <Property Name="password" Type="nvarchar" MaxLength="255" />
+    <Property Name="ip" Type="nvarchar" MaxLength="255" />
+    <Property Name="lastenter" Type="nvarchar" MaxLength="255" />
+    <Property Name="services" Type="nvarchar" MaxLength="255" />
+    <Property Name="type" Type="float" />
+  </EntityType>
+  <Association Name="FK__Insurance__Count__1E6F845E">
     <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
     <End Role="Insurance" Type="Self.Insurance" Multiplicity="*" />
     <ReferentialConstraint>
@@ -112,19 +155,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Login_His__IPati__48CFD27E">
-    <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+  <Association Name="FK__Login_His__IUser__2BC97F7C">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="Login_History" Type="Self.Login_History" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Patient">
+      <Principal Role="User">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Login_History">
-        <PropertyRef Name="IPatient" />
+        <PropertyRef Name="IUser" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Patient__IInsura__45F365D3">
+  <Association Name="FK__Patient__IInsura__24285DB4">
     <End Role="Insurance" Type="Self.Insurance" Multiplicity="0..1" />
     <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
     <ReferentialConstraint>
@@ -136,7 +179,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Patient__Social___44FF419A">
+  <Association Name="FK__Patient__Social___2334397B">
     <End Role="Social_License" Type="Self.Social_License" Multiplicity="0..1" />
     <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
     <ReferentialConstraint>
@@ -148,15 +191,63 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__User__IPatient__4BAC3F29">
-    <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+  <Association Name="FK__User__Type__28ED12D1">
+    <End Role="User_Type" Type="Self.User_Type" Multiplicity="0..1" />
     <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Pati__IPati__36470DEF">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+    <End Role="User_Patient" Type="Self.User_Patient" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Patient">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="User">
+      <Dependent Role="User_Patient">
         <PropertyRef Name="IPatient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Pati__IUser__3552E9B6">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="User_Patient" Type="Self.User_Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Patient">
+        <PropertyRef Name="IUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Serv__IServ__32767D0B">
+    <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+    <End Role="User_Service" Type="Self.User_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Service">
+        <PropertyRef Name="IService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Serv__IUser__318258D2">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="User_Service" Type="Self.User_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Service">
+        <PropertyRef Name="IUser" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -166,28 +257,49 @@
     <EntitySet Name="Login_History" EntityType="Self.Login_History" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="patients$" EntityType="Self.patients$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="services$" EntityType="Self.services$" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Social_License" EntityType="Self.Social_License" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Insurance__Count__403A8C7D" Association="Self.FK__Insurance__Count__403A8C7D">
+    <EntitySet Name="User_Patient" EntityType="Self.User_Patient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Service" EntityType="Self.User_Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Type" EntityType="Self.User_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users$" EntityType="Self.users$" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Insurance__Count__1E6F845E" Association="Self.FK__Insurance__Count__1E6F845E">
       <End Role="Country" EntitySet="Country" />
       <End Role="Insurance" EntitySet="Insurance" />
     </AssociationSet>
-    <AssociationSet Name="FK__Login_His__IPati__48CFD27E" Association="Self.FK__Login_His__IPati__48CFD27E">
-      <End Role="Patient" EntitySet="Patient" />
+    <AssociationSet Name="FK__Login_His__IUser__2BC97F7C" Association="Self.FK__Login_His__IUser__2BC97F7C">
+      <End Role="User" EntitySet="User" />
       <End Role="Login_History" EntitySet="Login_History" />
     </AssociationSet>
-    <AssociationSet Name="FK__Patient__IInsura__45F365D3" Association="Self.FK__Patient__IInsura__45F365D3">
+    <AssociationSet Name="FK__Patient__IInsura__24285DB4" Association="Self.FK__Patient__IInsura__24285DB4">
       <End Role="Insurance" EntitySet="Insurance" />
       <End Role="Patient" EntitySet="Patient" />
     </AssociationSet>
-    <AssociationSet Name="FK__Patient__Social___44FF419A" Association="Self.FK__Patient__Social___44FF419A">
+    <AssociationSet Name="FK__Patient__Social___2334397B" Association="Self.FK__Patient__Social___2334397B">
       <End Role="Social_License" EntitySet="Social_License" />
       <End Role="Patient" EntitySet="Patient" />
     </AssociationSet>
-    <AssociationSet Name="FK__User__IPatient__4BAC3F29" Association="Self.FK__User__IPatient__4BAC3F29">
-      <End Role="Patient" EntitySet="Patient" />
+    <AssociationSet Name="FK__User__Type__28ED12D1" Association="Self.FK__User__Type__28ED12D1">
+      <End Role="User_Type" EntitySet="User_Type" />
       <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Pati__IPati__36470DEF" Association="Self.FK__User_Pati__IPati__36470DEF">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="User_Patient" EntitySet="User_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Pati__IUser__3552E9B6" Association="Self.FK__User_Pati__IUser__3552E9B6">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Patient" EntitySet="User_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Serv__IServ__32767D0B" Association="Self.FK__User_Serv__IServ__32767D0B">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="User_Service" EntitySet="User_Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Serv__IUser__318258D2" Association="Self.FK__User_Serv__IUser__318258D2">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Service" EntitySet="User_Service" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

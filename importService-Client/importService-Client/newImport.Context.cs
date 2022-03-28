@@ -25,13 +25,18 @@ namespace importService_Client
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<patients_> patients_ { get; set; }
+        public virtual DbSet<services_> services_ { get; set; }
+        public virtual DbSet<users_> users_ { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Insurance> Insurances { get; set; }
         public virtual DbSet<Login_History> Login_History { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Social_License> Social_License { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<patients_> patients_ { get; set; }
+        public virtual DbSet<User_Patient> User_Patient { get; set; }
+        public virtual DbSet<User_Service> User_Service { get; set; }
+        public virtual DbSet<User_Type> User_Type { get; set; }
     }
 }

@@ -17,17 +17,15 @@ namespace importService_Client
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
-            this.Client_Service = new HashSet<Client_Service>();
+            this.User_Service = new HashSet<User_Service>();
         }
     
         public int ID { get; set; }
-        public string Title { get; set; }
-        public string MainImagePath { get; set; }
-        public int Duration { get; set; }
-        public double Cost { get; set; }
-        public int Discount { get; set; }
+        public int Code { get; set; }
+        public string Tittle { get; set; }
+        public double Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Client_Service> Client_Service { get; set; }
+        public virtual ICollection<User_Service> User_Service { get; set; }
     }
 }

@@ -1,3 +1,5 @@
+use [pr1-22-vodyannikoves_up2_day2_part2]
+
 Create Table Country(
 ID int primary key IDENTITY(0,1),
 Title varchar(50) not null)
@@ -30,16 +32,40 @@ Passport_Number int not null,
 BirthDate date not null,
 IInsurance int foreign key REFERENCES Insurance(ID))
 
-Create Table Login_History(
+Create Table User_Type(
 ID int primary key IDENTITY(0,1),
-Title varchar(50) not null,
-IPatient int foreign key REFERENCES Patient(ID),
-IPaddress varchar(30) not null,
-Browser varchar(MAX) not null,
-UA varchar(MAX) not null)
+Tittle varchar(40) not null)
 
 Create Table [User](
 ID int primary key IDENTITY(0,1),
-IPatient int foreign key REFERENCES Patient(ID),
 Login varchar(MAX) not null,
-Password varchar(MAX) not null)
+Password varchar(MAX) not null,
+Type int foreign key REFERENCES User_Type(ID))
+
+Create Table Login_History(
+ID int primary key IDENTITY(0,1),
+IUser int foreign key REFERENCES [User](ID),
+IPaddress varchar(30) not null,
+LastEnter date,
+MetaData varchar(MAX))
+
+Create Table [Service](
+ID int primary key IDENTITY(0,1),
+Code int unique not null,
+Tittle varchar(40) not null,
+Price float not null)
+
+Create Table User_Service(
+ID int primary key IDENTITY(0,1),
+IUser int foreign key REFERENCES [User](ID),
+IService int foreign key REFERENCES Service(ID))
+
+Create Table User_Patient(
+ID int primary key IDENTITY(0,1),
+IUser int foreign key REFERENCES [User](ID),
+IPatient int foreign key REFERENCES Patient(ID))
+--OS varchar(MAX),
+--OsVersion varchar(MAX),
+--Browser varchar(MAX),
+--Language varchar(10),
+--Revision varchar(10))

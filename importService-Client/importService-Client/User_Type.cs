@@ -12,14 +12,18 @@ namespace importService_Client
     using System;
     using System.Collections.Generic;
     
-    public partial class Login_History
+    public partial class User_Type
     {
-        public int ID { get; set; }
-        public Nullable<int> IUser { get; set; }
-        public string IPaddress { get; set; }
-        public Nullable<System.DateTime> LastEnter { get; set; }
-        public string MetaData { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User_Type()
+        {
+            this.Users = new HashSet<User>();
+        }
     
-        public virtual User User { get; set; }
+        public int ID { get; set; }
+        public string Tittle { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

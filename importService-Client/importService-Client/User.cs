@@ -14,11 +14,25 @@ namespace importService_Client
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Login_History = new HashSet<Login_History>();
+            this.User_Patient = new HashSet<User_Patient>();
+            this.User_Service = new HashSet<User_Service>();
+        }
+    
         public int ID { get; set; }
-        public Nullable<int> IPatient { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public Nullable<int> Type { get; set; }
     
-        public virtual Patient Patient { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Login_History> Login_History { get; set; }
+        public virtual User_Type User_Type { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Patient> User_Patient { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Service> User_Service { get; set; }
     }
 }
