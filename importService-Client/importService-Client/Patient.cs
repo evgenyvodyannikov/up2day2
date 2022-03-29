@@ -17,6 +17,7 @@ namespace importService_Client
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
         {
+            this.Bloods = new HashSet<Blood>();
             this.User_Patient = new HashSet<User_Patient>();
         }
     
@@ -34,6 +35,8 @@ namespace importService_Client
         public System.DateTime BirthDate { get; set; }
         public Nullable<int> IInsurance { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Blood> Bloods { get; set; }
         public virtual Insurance Insurance { get; set; }
         public virtual Social_License Social_License { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

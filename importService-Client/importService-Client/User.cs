@@ -17,6 +17,7 @@ namespace importService_Client
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.Blood_Service = new HashSet<Blood_Service>();
             this.Login_History = new HashSet<Login_History>();
             this.User_Patient = new HashSet<User_Patient>();
             this.User_Service = new HashSet<User_Service>();
@@ -27,6 +28,8 @@ namespace importService_Client
         public string Password { get; set; }
         public Nullable<int> Type { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Blood_Service> Blood_Service { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Login_History> Login_History { get; set; }
         public virtual User_Type User_Type { get; set; }

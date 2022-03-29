@@ -52,6 +52,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blood.cs">
+      <DependentUpon>newImport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="blood_.cs">
+      <DependentUpon>newImport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Blood_Analyzer.cs">
+      <DependentUpon>newImport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Blood_Service.cs">
+      <DependentUpon>newImport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="blood_services_.cs">
+      <DependentUpon>newImport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Blood_Status.cs">
+      <DependentUpon>newImport.tt</DependentUpon>
+    </Compile>
     <Compile Include="Client.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

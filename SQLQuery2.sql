@@ -64,6 +64,31 @@ Create Table User_Patient(
 ID int primary key IDENTITY(0,1),
 IUser int foreign key REFERENCES [User](ID),
 IPatient int foreign key REFERENCES Patient(ID))
+
+Create Table Blood(
+ID int primary key IDENTITY(0,1),
+Barcode int unique not null,
+DonateDate date not null,
+IPatient int foreign key REFERENCES Patient(ID))
+
+Create Table Blood_Status(
+ID int primary key IDENTITY(0,1),
+Title varchar(35) not null)
+
+Create Table Blood_Analyzer(
+ID int primary key IDENTITY(0,1),
+Title varchar(35) not null)
+
+Create Table Blood_Service(
+ID int primary key IDENTITY(0,1),
+IBlood int foreign key REFERENCES Blood(ID),
+IService int foreign key REFERENCES Service(ID),
+Result float not null,
+IsAccepted bit not null,
+IStatus int foreign key REFERENCES Blood_Status(ID),
+IAnalyzer int foreign key REFERENCES Blood_Analyzer(ID),
+IUser int foreign key REFERENCES [User](ID))
+
 --OS varchar(MAX),
 --OsVersion varchar(MAX),
 --Browser varchar(MAX),

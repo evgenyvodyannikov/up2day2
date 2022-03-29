@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\vodya\Downloads\up2day2\importService-Client\importService-Client\newImport.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\pr1-22-vodyannikoves\Downloads\up2day2\importService-Client\importService-Client\newImport.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

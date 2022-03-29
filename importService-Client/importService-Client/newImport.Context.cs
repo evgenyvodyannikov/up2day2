@@ -25,18 +25,24 @@ namespace importService_Client
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<patients_> patients_ { get; set; }
-        public virtual DbSet<services_> services_ { get; set; }
-        public virtual DbSet<users_> users_ { get; set; }
+        public virtual DbSet<Blood> Bloods { get; set; }
+        public virtual DbSet<blood_> blood_ { get; set; }
+        public virtual DbSet<Blood_Analyzer> Blood_Analyzer { get; set; }
+        public virtual DbSet<Blood_Service> Blood_Service { get; set; }
+        public virtual DbSet<blood_services_> blood_services_ { get; set; }
+        public virtual DbSet<Blood_Status> Blood_Status { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Insurance> Insurances { get; set; }
         public virtual DbSet<Login_History> Login_History { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
+        public virtual DbSet<patients_> patients_ { get; set; }
         public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<services_> services_ { get; set; }
         public virtual DbSet<Social_License> Social_License { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<User_Patient> User_Patient { get; set; }
         public virtual DbSet<User_Service> User_Service { get; set; }
         public virtual DbSet<User_Type> User_Type { get; set; }
+        public virtual DbSet<users_> users_ { get; set; }
     }
 }

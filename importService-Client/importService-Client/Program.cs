@@ -19,11 +19,88 @@ namespace importService_Client
             int UserType = 3;
             int Services = 0;
             int UUsers = 0;
+            int BloodDonation = 0;
+            int BloodResult = 0;
             List<patients_> patients = context.patients_.ToList();
-            AddUserType();
-            AddServices();
-            AddUsers();
-            AddPatients();
+            //AddUserType();
+            //AddServices();
+            //AddUsers();
+            //AddPatients();
+            //AddBlood();
+            AddBloodService();
+
+            void AddBlood()
+            {
+
+                List<blood_> bloodes = context.blood_.ToList();
+                foreach(blood_ blood in bloodes)
+                {
+                    long offset = (long)blood.date;
+                    DateTime donateDate = UnixTimeStampToDateTime(offset);
+                    Patient patient = context.Patients.Where(x => x.ID == (int)blood.patient).FirstOrDefault();
+
+
+                    Blood newBlood = new Blood { Barcode = (int)blood.barcode, DonateDate = donateDate, Patient = patient };
+                    context.Bloods.Add(newBlood);
+                    context.SaveChanges();
+                    BloodDonation++;
+                }
+            }
+
+            void AddBloodService()
+            {
+                List<blood_services_> blservices = context.blood_services_.ToList();
+                foreach(blood_services_ service in blservices)
+                {
+                    Blood_Status BStatus;
+
+                    if (context.Blood_Status.Where(x => x.Title == service.status).Any())
+                    {
+                        BStatus = context.Blood_Status.Where(x => x.Title == service.status).FirstOrDefault();
+                    }
+                    else
+                    {
+                        BStatus = new Blood_Status { Title = service.status.Trim() };
+                        context.Blood_Status.Add(BStatus);
+                        context.SaveChanges();
+                    }
+
+                    Blood_Analyzer BLAnalyzer;
+
+                    if (context.Blood_Analyzer.Where(x => x.Title == service.analyzer).Any())
+                    {
+                        BLAnalyzer = context.Blood_Analyzer.Where(x => x.Title == service.analyzer).FirstOrDefault();
+                    }
+                    else
+                    {
+                        BLAnalyzer = new Blood_Analyzer { Title = service.analyzer.Trim() };
+                        context.Blood_Analyzer.Add(BLAnalyzer);
+                        context.SaveChanges();
+                    }
+
+                    Service sservice = context.Services.Where(x => x.Code == (int)service.service).FirstOrDefault();
+                    User user = context.Users.Where(x => x.ID == service.user).FirstOrDefault();
+                    Blood blood = context.Bloods.Where(x => x.ID == service.blood - 1).FirstOrDefault();
+
+                    Blood_Service newBlService = new Blood_Service
+                    {
+                        Blood = blood,
+                        Service = sservice,
+                        User = user,
+                        Blood_Analyzer = BLAnalyzer,
+                        Blood_Status = BStatus,
+                        IsAccepted = service.accepted == "true" ? true : false,
+                        Result = (double)service.result
+                    };
+
+                    context.Blood_Service.Add(newBlService);
+                    context.SaveChanges();
+                    BloodResult++;
+                    Console.WriteLine(BloodResult);
+                }
+            }
+
+
 
             void AddUserType()
             {
@@ -193,15 +270,18 @@ namespace importService_Client
                     Console.WriteLine(Patients);
 
                 }
-                Console.WriteLine("Добавлено пациентов: " + Patients +
-                          "\nСтран: " + Countries +
-                          "\nСтраховок: " + Insurances +
-                          "\nСоц. лицензий: " + License +
-                          "\nТипов пользователей: " + UserType +
-                          "\nСервисов: " + Services +
-                          "\nПользователей: " + UUsers);
-                Console.ReadKey();
             }
+
+            Console.WriteLine("Добавлено пациентов: " + Patients +
+                         "\nСтран: " + Countries +
+                         "\nСтраховок: " + Insurances +
+                         "\nСоц. лицензий: " + License +
+                         "\nТипов пользователей: " + UserType +
+                         "\nСервисов: " + Services +
+                         "\nПользователей: " + UUsers +
+                         "\nСдач крови: " + BloodDonation + 
+                         "\nАнализов: " + BloodResult);
+            Console.ReadKey();
         }
           
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
